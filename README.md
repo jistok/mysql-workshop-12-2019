@@ -2,4 +2,5 @@
 
 * [Point-in-time recovery (PiTR)](./pitr_spring_music.md)
 * [Developer initiated backup](./dev_initiated_backup.md)
+* [Monitoring](./monitoring.md)
 
