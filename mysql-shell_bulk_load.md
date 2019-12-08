@@ -3,7 +3,7 @@
 I would strongly recommend chunking the import into smaller, more manageable
 transaction sizes.   Probably the easiest way to do this is to use the
 [mysql-shell utility](https://dev.mysql.com/doc/mysql-shell/8.0/en/). In
-particular, it has built-in functionality to import files in chunks and in
+particular, it has built-in functionality to import files in small chunks in
 parallel across multiple threads
 [here](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-parallel-table.html)
 is a referene.
