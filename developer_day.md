@@ -47,6 +47,8 @@ cf mysqldump dev-db-03 album > my-db-dump-$( date +%s ).sql
   - Create the tables: use `./osm_tables.sql`, either copy/paste into a `cf mysql` terminal, or `cf mysql dev-db-03 < ./osm_tables.sql`
   - Set your service instance name in the load script, `./load_osm_data_mysql.sh`
   - Run that script to load data into these tables: `$ ./load_osm_data_mysql.sh`
+    **Caveat**: if you need to load large data sets, it's better to do that in smaller chunks, as discussed
+    [here](./mysql-shell_bulk_load.md).
   - Run query:
     ```
     select v, count(*) from osm_k_v where k = 'amenity' group by 1 order by 2 desc limit 30;
