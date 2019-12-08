@@ -5,8 +5,8 @@
 * [Operator Day](./operator_day.md)
 
 ## Other possible topics
-* [Point-in-time recovery (PiTR)](./pitr_spring_music.md)
 * [Developer initiated backup](./dev_initiated_backup.md)
+* [Point-in-time recovery (PiTR)](./pitr_spring_music.md)
 * [Monitoring](./monitoring.md)
 * [Time zone](./timezone.md)
 

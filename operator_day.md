@@ -1,7 +1,7 @@
 # Day Two: Operator Focus
 
 * Opening, introductions
-* We have a single PAS foundation for these activities, so we will all need to share it, making this day a group activity.
+* **Note:** We have a single PAS foundation for these activities, so we will all need to share it, making this day a group activity.
 
 * Install and configure MySQL tile for PCF.
 
