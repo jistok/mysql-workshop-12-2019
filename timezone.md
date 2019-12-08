@@ -3,7 +3,7 @@
 ## Rationale behind using UTC
 As organizations are increasingly operating globally, it is not possible to know where those users may be located,
 or in which time zone they are.  We know, if we have a data center, where it is located, but we may have the data
-replicated in multiple locations, each operating on its own time zome.  Given this, we believe it is simplest to
+replicated in multiple locations, each operating on its own time zone.  Given this, we believe it is simplest to
 adopt the convention that all data is stored in UTC, and we know this to be true for all our database systems.  When
 a user access the application, we can determine the user's location and therefore their expected time zone, and apply
 that to their view of the data, for their session.
