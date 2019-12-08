@@ -43,15 +43,32 @@ cf mysql dev-db-03
 cf mysqldump dev-db-03 album > my-db-dump-$( date +%s ).sql
 ```
 
-* Work through example:
-(Refer to `workshop_02.md` from Singapore sessions)
-Load 1M rows (see `mysql-shell_bulk_load.txt` and how to adapt to `cf mysql`)
-Run query
-Review query plan (e.g. EXPLAIN)
-Create an index
-Re-run the query
-Review query plan now that there is an index
-Show how to compress the table
+* Work through example of data loading, index creation, viewing query plan, compressing a table:
+  - Create the tables: use `./osm_tables.sql`, either copy/paste into a `cf mysql` terminal, or `cf mysql dev-db-03 < ./osm_tables.sql`
+  - Set your service instance name in the load script, `./load_osm_data_mysql.sh`
+  - Run that script to load data into these tables: `$ ./load_osm_data_mysql.sh`
+  - Run query:
+    ```
+    mysql> select v, count(*) from osm_k_v where k = 'amenity' group by 1 order by 2 desc limit 30;
+    ```
+  - Review query plan (e.g. EXPLAIN):
+    ```
+    mysql> explain select v, count(*) from osm_k_v where k = 'amenity' group by 1 order by 2 desc limit 30;
+    ```
+  - Create an index:
+    ```
+    mysql> CREATE INDEX osm_k_idx ON osm_k_v(k);
+    ```
+  - See how that index affects the query plan:
+    ```
+    mysql> explain select v, count(*) from osm_k_v where k = 'amenity' group by 1 order by 2 desc limit 30;
+    ```
+  - Re-run the query to see how the index affects its run time.
+  - Show how to compress the table:
+    ```
+    mysql> ALTER TABLE osm_k_v COMPRESSION="lz4";
+    mysql> OPTIMIZE TABLE osm_k_v;
+    ```
 
 * Discuss table partitioning
 Show partition pruning in query plan
