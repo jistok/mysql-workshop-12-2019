@@ -2,14 +2,17 @@
 
 * Opening, introductions
 * Prerequisites
-  - `cf` CLI
-  - A MySQL CLI (e.g. `mysql`)
-  - The `cf mysql` plugin
+  - [`cf` CLI](https://github.com/cloudfoundry/cli/releases)
+  - A MySQL CLI: `brew install mysql` on Mac; [this](https://stackoverflow.com/questions/3246482/mysql-command-line-client-for-windows)
+    discusses the process for Windows
+  - The [`cf mysql` plugin](https://github.com/andreasf/cf-mysql-plugin): `$ cf install-plugin -r "CF-Community" mysql-plugin`
   - Java JDK
-  - Git CLI (e.g. `git`)
+  - Git CLI: [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) is a reference on how to do this for various OS's
   - Use Git to clone the [Spring Music GitHub repo](https://github.com/cloudfoundry-samples/spring-music)
+
 * Briefly, what is the Pivotal Platform (aka PAS, PCF)?
 * What is the MySQL “tile” for PAS?
+
 * What is a service instance?  Create one:
 ```
 $ cf create-service p.mysql dev-db-03
