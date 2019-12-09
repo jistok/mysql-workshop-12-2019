@@ -26,5 +26,3 @@
 
 * Discuss MySQL Workbench for data migration
 
-* Run Sysbench to produce performance benchmarks
-

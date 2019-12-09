@@ -5,18 +5,26 @@
   - [`cf` CLI](https://github.com/cloudfoundry/cli/releases)
   - A MySQL CLI: `brew install mysql` on Mac; [this](https://stackoverflow.com/questions/3246482/mysql-command-line-client-for-windows)
     discusses the process for Windows
-  - The [`cf mysql` plugin](https://github.com/andreasf/cf-mysql-plugin): `$ cf install-plugin -r "CF-Community" mysql-plugin`
+  - The [`cf mysql` plugin](https://github.com/andreasf/cf-mysql-plugin): `cf install-plugin -r "CF-Community" mysql-plugin`
   - Java JDK
-  - Git CLI: [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) is a reference on how to do this for various OS's
-  - Use Git to clone the [Spring Music GitHub repo](https://github.com/cloudfoundry-samples/spring-music)
 
 * Briefly, what is the Pivotal Platform (aka PAS, PCF)?
 * What is the MySQL “tile” for PAS?
 
 * What is a service instance?  Create one:
+
+**In these steps, the `-03` is present to differentiate one student from another; use your assigned ID here in place of the `03`**
+
 ```
-$ cf create-service p.mysql dev-db-03
+cf create-service p.mysql dev-db-03
 ```
+
+* Download the [Zip file](https://github.com/cloudfoundry-samples/spring-music/archive/master.zip) containing the _Spring Music_ app,
+then unzip the downloaded file.
+  - Change into the resulting directory
+  - Edit the `./manifest.yml` file, appending your team ID to the `name` value; e.g. `name: spring-music-03`
+  - Build the Spring Boot app: `./gradlew clean build`
+
 * How do you deploy an app to PAS?
 ```
 cf push --no-start
@@ -46,7 +54,7 @@ cf mysqldump dev-db-03 album > my-db-dump-$( date +%s ).sql
 * Work through example of data loading, index creation, viewing query plan, compressing a table.
   - Create the tables: use `./osm_tables.sql`, either copy/paste into a `cf mysql` terminal, or `cf mysql dev-db-03 < ./osm_tables.sql`
   - Set your service instance name in the load script, `./load_osm_data_mysql.sh`
-  - Run that script to load data into these tables: `$ ./load_osm_data_mysql.sh`
+  - Run that script to load data into these tables: `./load_osm_data_mysql.sh`
     **Caveat**: if you need to load large data sets, it's better to do that in smaller chunks, as discussed
     [here](./mysql-shell_bulk_load.md).
   - Run query:
