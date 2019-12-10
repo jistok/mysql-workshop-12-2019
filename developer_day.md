@@ -52,6 +52,7 @@ cf mysqldump dev-db-03 album > my-db-dump-$( date +%s ).sql
 ```
 
 * Work through example of data loading, index creation, viewing query plan, compressing a table.
+**NOTE:** you must have an app bound to the service instance before doing this.
   - Create the tables: use `./osm_tables.sql`, either copy/paste into a `cf mysql` terminal, or `cf mysql dev-db-03 < ./osm_tables.sql`
   - Set your service instance name in the load script, `./load_osm_data_mysql.sh`
   - Run that script to load data into these tables: `./load_osm_data_mysql.sh`

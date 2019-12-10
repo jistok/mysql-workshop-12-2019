@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TODO: set this to the name of your MySQL service
-svc_name="small-db"
+svc_name="mike-db-med"
 
 # The remaining values are ok as they are.
 osm_url="https://s3.amazonaws.com/goddard.datasets/osm.csv.gz"
@@ -14,7 +14,7 @@ curl $osm_url | zcat - | cf mysql $svc_name --local-infile=1 \
 # Load the osm table from that landing table.
 cat <<EndOfSQL | cf mysql $svc_name
 INSERT INTO osm
-SELECT id, STR_TO_DATE(date_time, '%Y-%m-%dT%H:%i:%sZ'), uid, lat, lon, name
+SELECT id, TIMESTAMP(STR_TO_DATE(date_time, '%Y-%m-%dT%H:%i:%sZ')), uid, lat, lon, name
 FROM osm_load
 ORDER BY id ASC;
 EndOfSQL
