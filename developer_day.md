@@ -16,7 +16,7 @@
 **In these steps, the `-03` is present to differentiate one student from another; use your assigned ID here in place of the `03`**
 
 ```
-cf create-service p.mysql dev-db-03
+cf create-service p.mysql db-small dev-db-03
 ```
 
 * Download the [Zip file](https://github.com/cloudfoundry-samples/spring-music/archive/master.zip) containing the _Spring Music_ app,
