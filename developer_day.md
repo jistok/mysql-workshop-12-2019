@@ -48,7 +48,8 @@ cf mysql dev-db-03
 ```
 * Using a similar approach, a developer is able to make a backup:
 ```
-cf mysqldump dev-db-03 album > my-db-dump-$( date +%s ).sql
+cf mysqldump dev-db-03 album --column-statistics=0 --set-gtid-purged=OFF > my-db-dump-$( date +%s ).sql
+
 ```
 
 * Work through example of data loading, index creation, viewing query plan, compressing a table.

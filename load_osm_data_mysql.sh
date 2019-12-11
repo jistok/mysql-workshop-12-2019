@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # TODO: set this to the name of your MySQL service
-svc_name="mike-db-med"
+svc_name="dev-db-20"
 
 # The remaining values are ok as they are.
 osm_url="https://s3.amazonaws.com/goddard.datasets/osm.csv.gz"
