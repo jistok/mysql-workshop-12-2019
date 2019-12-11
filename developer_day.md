@@ -78,9 +78,51 @@ cf mysqldump dev-db-03 album --column-statistics=0 --set-gtid-purged=OFF > my-db
   - Re-run the query to see how the index affects its run time.
   - Show how to compress the table:
     ```
-    ALTER TABLE osm_k_v COMPRESSION="lz4";
-    OPTIMIZE TABLE osm_k_v;
+    -- Verify compression is working
+    mysql> CREATE TABLE osm_k_v_zlib
+        -> (
+        ->   id BIGINT
+        ->   , k VARCHAR(64)
+        ->   , v VARCHAR(512)
+        ->   , FOREIGN KEY (id) REFERENCES osm(id) ON DELETE CASCADE
+        -> ) ENGINE=INNODB, COMPRESSION="zlib";
+    Query OK, 0 rows affected (0.18 sec)
+
+    mysql> insert into osm_k_v_zlib select * from osm_k_v;
+    Query OK, 3032167 rows affected (19.25 sec)
+    Records: 3032167  Duplicates: 0  Warnings: 0
+
+    mysql> SELECT
+        ->   table_name AS `Table`,
+        ->   round(((data_length + index_length) / 1024 / 1024), 2) `Size in MB`
+        -> FROM information_schema.TABLES
+        -> WHERE
+        ->   table_schema = "service_instance_db"
+        ->   AND table_name = "osm_k_v";
+    +---------+------------+
+    | Table   | Size in MB |
+    +---------+------------+
+    | osm_k_v |     361.00 |
+    +---------+------------+
+    1 row in set (0.16 sec)
+
+    mysql> SELECT
+        ->   table_name AS `Table`,
+        ->   round(((data_length + index_length) / 1024 / 1024), 2) `Size in MB`
+        -> FROM information_schema.TABLES
+        -> WHERE
+        ->   table_schema = "service_instance_db"
+        ->   -- AND table_name = "osm_k_v";
+        ->   AND table_name = "osm_k_v_zlib";
+    +--------------+------------+
+    | Table        | Size in MB |
+    +--------------+------------+
+    | osm_k_v_zlib |     240.34 |
+    +--------------+------------+
+    1 row in set (0.16 sec)
+
     ```
+    **RESULT:** In this case, the compressed table is about 1/3 smaller than the original.
 
 * Discuss table partitioning and show partition pruning.
   - Create a very simple, partitioned, table:
